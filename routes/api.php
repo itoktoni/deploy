@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::match(['POST', 'GET'],'deploy', function(Request $request){
+Route::match(['POST', 'GET'],'/deploy', function(Request $request){
     // $githubPayload = $request->getContent();
     // $githubHash = $request->header('X-Hub-Signature');
 
