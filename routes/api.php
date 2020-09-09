@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('deploy', function(Request $request){
+Route::match(['POST', 'GET'],'deploy', function(Request $request){
     // $githubPayload = $request->getContent();
     // $githubHash = $request->header('X-Hub-Signature');
 
@@ -28,11 +28,12 @@ Route::post('deploy', function(Request $request){
     // $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
 
     // if (hash_equals($githubHash, $localHash)) {
-        $root_path = base_path();
-        $process = new Process(['git pull origin master']);
-        $process->run(function ($type, $buffer) {
-            echo $buffer;
-        });
+        // $root_path = base_path();
+        // $process = new Process(['git pull origin master']);
+        // $process->run(function ($type, $buffer) {
+        //     echo $buffer;
+        // });
     // }
 
+    exec('git pull origin master');
 });
