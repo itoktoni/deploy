@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Process\Process;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('deploy', function(Request $request){
+    // $githubPayload = $request->getContent();
+    // $githubHash = $request->header('X-Hub-Signature');
+
+    // $localToken = config('app.deploy_secret');
+    // $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
+
+    // if (hash_equals($githubHash, $localHash)) {
+        $root_path = base_path();
+        $process = new Process(['git pull origin master']);
+        $process->run(function ($type, $buffer) {
+            echo $buffer;
+        });
+    // }
+
 });
