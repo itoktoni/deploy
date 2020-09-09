@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::match(['POST', 'GET'],'/deploy', function(Request $request){
+    exec('git pull origin master');
+    return 'sucess';
     // $githubPayload = $request->getContent();
     // $githubHash = $request->header('X-Hub-Signature');
 
@@ -35,5 +37,4 @@ Route::match(['POST', 'GET'],'/deploy', function(Request $request){
         // });
     // }
 
-    exec('git pull origin master');
 });
